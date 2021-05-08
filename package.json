@@ -1,12 +1,12 @@
 {
-  "name": "dotenv-me",
-  "description": "CLI to interact with dotenv me",
-  "version": "0.3.0",
+  "name": "@dotenv/cli",
+  "description": "CLI to interact with dotenv",
+  "version": "0.1.0",
   "author": "motdotla @motdotla",
   "bin": {
-    "dotenv-me": "./bin/run"
+    "dotenv-cli": "./bin/run"
   },
-  "bugs": "https://github.com/motdotla/dotenv-me/issues",
+  "bugs": "https://github.com/dotenv-org/cli/issues",
   "dependencies": {
     "@oclif/command": "^1",
     "@oclif/config": "^1",
@@ -44,7 +44,7 @@
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
   ],
-  "homepage": "https://github.com/motdotla/dotenv-me",
+  "homepage": "https://github.com/dotenv-org/cli",
   "keywords": [
     "oclif"
   ],
@@ -52,12 +52,12 @@
   "main": "lib/index.js",
   "oclif": {
     "commands": "./lib/commands",
-    "bin": "dotenv-me",
+    "bin": "dotenv-cli",
     "plugins": [
       "@oclif/plugin-help"
     ]
   },
-  "repository": "motdotla/dotenv-me",
+  "repository": "dotenv-org/cli",
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "eslint . --ext .ts --config .eslintrc",
