@@ -12,7 +12,6 @@
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^3",
     "axios": "^0.21.1",
-    "crypto": "^1.0.1",
     "dotenv": "^9.0.0",
     "git-diff": "^2.0.6",
     "prompts": "^2.4.1",
