@@ -9,7 +9,7 @@ export default class Push extends Command {
   async run() {
     const {args, flags} = this.parse(Push)
 
-    const dotenvUrl = process.env.DOTENV_URL || 'https://me.dotenv.org'
+    const dotenvUrl = process.env.DOTENV_URL || 'https://cli.dotenv.org'
 
     const fs = require('fs')
     const axios = require('axios')

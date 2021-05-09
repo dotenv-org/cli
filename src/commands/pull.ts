@@ -9,7 +9,7 @@ export default class Pull extends Command {
   async run() {
     const {args, flags} = this.parse(Pull)
 
-    const dotenvUrl = process.env.DOTENV_URL || 'https://me.dotenv.org'
+    const dotenvUrl = process.env.DOTENV_URL || 'https://cli.dotenv.org'
 
     const fs = require('fs')
     const axios = require('axios')

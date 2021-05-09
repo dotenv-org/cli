@@ -9,7 +9,7 @@ export default class Init extends Command {
   async run() {
     const {args, flags} = this.parse(Init)
 
-    const dotenvUrl = process.env.DOTENV_URL || 'https://me.dotenv.org'
+    const dotenvUrl = process.env.DOTENV_URL || 'https://cli.dotenv.org'
 
     const fs = require('fs')
     const path = require('path')
