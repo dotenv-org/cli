@@ -6,3 +6,8 @@
 /package-lock.json
 /tmp
 node_modules
+
+# added for dotenv
+.env
+.env.me
+!.env.project

@@ -1,4 +1,5 @@
 import * as fs from 'fs'
+import * as crypto from 'crypto'
 
 class WriteEnvsService {
   run() {
@@ -13,7 +14,7 @@ class WriteEnvsService {
 
     const dotenvData = 'KEY=value'
     const meData = 'DOTENV_ME=me_' + meUid
-    const projectName = dir.split("/")[dir.split("/").length-1]
+    const projectName = dir.split('/')[dir.split('/').length - 1]
     const projectData = `DOTENV_PROJECT=prj_${projectUid}\nDOTENV_PROJECT_NAME=${projectName}`
 
     // 1. write .env
