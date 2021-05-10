@@ -47,11 +47,11 @@ class PushService {
     return dotenv.config({path: '.env.project'})
   }
 
-  get _DOTENV_ME(): string {
+  get _DOTENV_ME() {
     return this._envMe.parsed.DOTENV_ME
   }
 
-  get _DOTENV_PROJECT(): string {
+  get _DOTENV_PROJECT() {
     return this._envProject.parsed.DOTENV_PROJECT
   }
 }

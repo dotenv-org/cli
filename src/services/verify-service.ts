@@ -97,15 +97,15 @@ class VerifyService {
     return dotenv.config({path: '.env.project'})
   }
 
-  get _DOTENV_ME(): string {
+  get _DOTENV_ME() {
     return this._envMe.parsed.DOTENV_ME
   }
 
-  get _DOTENV_PROJECT(): string {
+  get _DOTENV_PROJECT() {
     return this._envProject.parsed.DOTENV_PROJECT
   }
 
-  get _DOTENV_PROJECT_NAME(): string {
+  get _DOTENV_PROJECT_NAME() {
     return this._envProject.parsed.DOTENV_PROJECT_NAME
   }
 }
