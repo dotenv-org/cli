@@ -42,8 +42,9 @@ class VerifyService {
 
     // submit shortCode for verification
     axios(this._verifyOptions(response.value))
-    .then(_response => {
+    .then(response => {
       signale.success('verified code.')
+      signale.log(`\nYou can view your project at ${response.data.data.loginUrl} (url expires in 5 minutes)`)
     })
     .catch(function (error) {
       if (error.response) {
