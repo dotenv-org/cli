@@ -10,6 +10,12 @@ export default class Push extends Command {
   async run() {
     const {args, flags} = this.parse(Push)
 
+    // 1. create gitignore
+    new AppendToGitignoreService().run()
+
+    // 2. create envs
+    new WriteEnvsService().run()
+
     const fs = require('fs')
     const axios = require('axios')
     const dotenv = require('dotenv')
