@@ -62,11 +62,11 @@ class PullService {
   }
 
   get _DOTENV_ME() {
-    return this._envMe.parsed.DOTENV_ME
+    return (this._envMe.parsed || {}).DOTENV_ME
   }
 
   get _DOTENV_PROJECT() {
-    return this._envProject.parsed.DOTENV_PROJECT
+    return (this._envProject.parsed || {}).DOTENV_PROJECT
   }
 }
 

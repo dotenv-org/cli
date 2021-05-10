@@ -98,15 +98,15 @@ class VerifyService {
   }
 
   get _DOTENV_ME() {
-    return this._envMe.parsed.DOTENV_ME
+    return (this._envMe.parsed || {}).DOTENV_ME
   }
 
   get _DOTENV_PROJECT() {
-    return this._envProject.parsed.DOTENV_PROJECT
+    return (this._envProject.parsed || {}).DOTENV_PROJECT
   }
 
   get _DOTENV_PROJECT_NAME() {
-    return this._envProject.parsed.DOTENV_PROJECT_NAME
+    return (this._envProject.parsed || {}).DOTENV_PROJECT_NAME
   }
 }
 
