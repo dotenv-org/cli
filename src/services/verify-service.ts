@@ -43,7 +43,7 @@ class VerifyService {
     // submit shortCode for verification
     axios(this._verifyOptions(response.value))
     .then(_response => {
-      signale.complete('verified code.')
+      signale.success('verified code.')
     })
     .catch(function (error) {
       if (error.response) {
