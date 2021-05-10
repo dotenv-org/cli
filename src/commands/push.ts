@@ -1,4 +1,5 @@
 import {Command, flags} from '@oclif/command'
+import {vars} from '../vars'
 
 export default class Push extends Command {
   static description = 'push .env'
@@ -8,8 +9,6 @@ export default class Push extends Command {
 
   async run() {
     const {args, flags} = this.parse(Push)
-
-    const dotenvUrl = process.env.DOTENV_URL || 'https://cli.dotenv.org'
 
     const fs = require('fs')
     const axios = require('axios')
@@ -21,7 +20,7 @@ export default class Push extends Command {
     const envProject = dotenv.config({ path: '.env.project' })
     const envMe = dotenv.config({ path: '.env.me' })
 
-    const url = dotenvUrl + '/v1/push'
+    const url = vars.apiUrl + '/v1/push'
     const data = {
       'projectUid': envProject.parsed['DOTENV_PROJECT'],
       'meUid': envMe.parsed['DOTENV_ME'],

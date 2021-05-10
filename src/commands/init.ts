@@ -1,4 +1,6 @@
 import {Command, flags} from '@oclif/command'
+import {vars} from '../vars'
+import {AppendToGitignoreService} from '../services/append-to-gitignore-service'
 
 export default class Init extends Command {
   static description = 'initialize .env.me and .env.project'
@@ -8,8 +10,6 @@ export default class Init extends Command {
 
   async run() {
     const {args, flags} = this.parse(Init)
-
-    const dotenvUrl = process.env.DOTENV_URL || 'https://cli.dotenv.org'
 
     const fs = require('fs')
     const path = require('path')
@@ -41,26 +41,8 @@ export default class Init extends Command {
       signale.complete(filename + ' created')
     }
 
-    function appendToGitignore(filename) {
-      if (fs.existsSync('.gitignore')) {
-        let filenameExists = false
-
-        try {
-          const data = fs.readFileSync('.gitignore', 'UTF-8')
-          const lines = data.split(/\r?\n/)
-
-          lines.forEach(function(line) {
-            if (line === filename) {
-              filenameExists = true
-            }
-          })
-        } catch (err) {}
-
-        if (filenameExists === false) {
-          fs.appendFileSync('.gitignore', "\n" + filename + "\n")
-        }
-      }
-    }
+		// 1. create gitignore
+		new AppendToGitignoreService().run()
 
     if (fs.existsSync(dotenvFilename)) {
       logExisting(dotenvFilename)
@@ -83,8 +65,6 @@ export default class Init extends Command {
       logCreating(projectFilename)
     }
 
-    appendToGitignore(dotenvFilename)
-    appendToGitignore(meFilename)
 
     const promptForShortCode = async () => {
       const response = await prompts({
@@ -99,7 +79,7 @@ export default class Init extends Command {
       const envMe = dotenv.config({ path: '.env.me' })
       const envProject = dotenv.config({ path: '.env.project' })
 
-      const url = dotenvUrl + '/v1/verify'
+      const url = vars.apiUrl + '/v1/verify'
       const data = {
         'shortCode': response.value,
         'projectUid': envProject.parsed['DOTENV_PROJECT'],
@@ -137,7 +117,7 @@ export default class Init extends Command {
       const envProject = dotenv.config({ path: '.env.project' })
 
       // submit email for identification
-      const url = dotenvUrl + '/v1/init'
+      const url = vars.apiUrl + '/v1/init'
       const data = {
         'email': response.value,
         'projectUid': envProject.parsed['DOTENV_PROJECT'],

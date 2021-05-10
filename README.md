@@ -59,3 +59,9 @@ ARGUMENTS
 OPTIONS
   --all  see all commands in CLI
 ```
+
+## Development
+
+```
+NODE_TLS_REJECT_UNAUTHORIZED=0 DOTENV_API_HOST=https://cli.dotenv.development ./bin/run
+```
