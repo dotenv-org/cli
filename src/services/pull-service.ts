@@ -1,8 +1,8 @@
 import * as fs from 'fs'
 import * as dotenv from 'dotenv'
-import * as axios from 'axios'
 import * as signale from 'signale'
 import * as gitDiff from 'git-diff'
+const axios = require('axios')
 
 import {vars} from '../vars'
 

@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as dotenv from 'dotenv'
-import * as axios from 'axios'
 import * as signale from 'signale'
+const axios = require('axios')
 
 import {vars} from '../vars'
 

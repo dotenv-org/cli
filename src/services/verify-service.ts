@@ -1,7 +1,7 @@
 import * as prompts from 'prompts'
 import * as signale from 'signale'
 import * as dotenv from 'dotenv'
-import * as axios from 'axios'
+const axios = require('axios')
 
 import {vars} from '../vars'
 
