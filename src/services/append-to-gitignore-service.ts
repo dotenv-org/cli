@@ -3,7 +3,7 @@ import * as fs from 'fs'
 class AppendToGitignoreService {
   run() {
     const file = '.gitignore'
-    const addedForDotenvMsg = '# added for dotenv'
+    const addedForDotenvMsg = '# Ignore (and don\'t ignore) for dotenv.'
 
     // 1. create .gitignore if doesn't exist
     if (!fs.existsSync(file)) {
