@@ -12,10 +12,18 @@ class WriteEnvsService {
     const meFile = '.env.me'
     const projectFile = '.env.project'
 
-    const dotenvData = 'KEY=value'
-    const meData = 'DOTENV_ME=me_' + meUid
+    const dotenvData = `# added by dotenv - do not commit this file to code
+KEY=value`
+
+    const meData = `# added by dotenv - do not commit this file to code
+# this file uniquely identifies you for this project
+# keep it safe, but if you lose it or expose it publicly, you can always generate a new one at dotenv.org
+DOTENV_ME=me_${meUid}`
     const projectName = dir.split('/')[dir.split('/').length - 1]
-    const projectData = `DOTENV_PROJECT=prj_${projectUid}\nDOTENV_PROJECT_NAME=${projectName}`
+    const projectData = `# added by dotenv - you SHOULD commit this file to code
+# this file uniquely identifies your project at dotenv.org
+DOTENV_PROJECT=prj_${projectUid}
+DOTENV_PROJECT_NAME=${projectName}`
 
     // 1. write .env
     if (fs.existsSync(dotenvFile)) {
