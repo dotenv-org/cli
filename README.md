@@ -13,21 +13,31 @@ Dotenv cli is a command line tool that syncs your `.env` files across machines a
 ## Install
 
 ```bash
-# install globally
+# install globally (recommended)
 npm install @dotenv/cli -g # optionally run with sudo npm install @dotenv/cli -g
+```
+
+or
+
+```bash
+# install locally
+npm install @dotenv/cli --save-dev
 ```
 
 ## Usage
 
-In your terminal, initialize dotenv the same way you initialized
-git.
+In your terminal (and in your project folder), initialize dotenv the same way you
+initialize git.
 
 ```bash
 dotenv-cli init
 ```
 
-This will create a `.env` file (if it doesn't already exists), a 
-`.env.project`, and `.env.me` file.
+This will create (if not existing) a
+
+* `.env` file
+* `.env.me` file
+* `.env.project` file 
 
 Make changes to your `.env` file and when you do, run:
 

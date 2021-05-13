@@ -1,5 +1,6 @@
 import * as fs from 'fs'
 import * as crypto from 'crypto'
+import * as signale from 'signale'
 
 class WriteEnvsService {
   run() {
@@ -27,23 +28,26 @@ DOTENV_PROJECT_NAME=${projectName}`
 
     // 1. write .env
     if (fs.existsSync(dotenvFile)) {
-      // do nothing
+      signale.success('Existing .env.')
     } else {
       fs.writeFileSync(dotenvFile, dotenvData)
+      signale.success('Created .env.')
     }
 
     // 2. write .env.me
     if (fs.existsSync(meFile)) {
-      // do nothing
+      signale.success('Existing .env.me.')
     } else {
       fs.writeFileSync(meFile, meData)
+      signale.success('Created .env.me.')
     }
 
     // 3. write .env.project
     if (fs.existsSync(projectFile)) {
-      // do nothing
+      signale.success('Existing .env.project.')
     } else {
       fs.writeFileSync(projectFile, projectData)
+      signale.success('Created .env.project.')
     }
   }
 }
