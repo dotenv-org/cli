@@ -1,7 +1,7 @@
 {
   "name": "@dotenv/cli",
   "description": "CLI to interact with dotenv",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "author": "motdotla @motdotla",
   "bin": {
     "dotenv-cli": "./bin/run"
