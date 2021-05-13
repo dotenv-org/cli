@@ -73,5 +73,5 @@ OPTIONS
 ## Development
 
 ```
-NODE_TLS_REJECT_UNAUTHORIZED=0 DOTENV_API_HOST=https://cli.dotenv.development ./bin/run
+NODE_TLS_REJECT_UNAUTHORIZED=0 DOTENV_API_URL=https://cli.dotenv.development ./bin/run
 ```
