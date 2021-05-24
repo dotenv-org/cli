@@ -15,7 +15,7 @@ export default class Pull extends Command {
     new AppendToGitignoreService().run()
 
     // 2. create envs
-    new WriteEnvsService().run()
+    new WriteEnvsService({quiet: true}).run()
 
     // 3. pull
     new PullService().run()
