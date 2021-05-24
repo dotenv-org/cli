@@ -7,13 +7,16 @@ import {vars} from '../vars'
 
 class PushService {
   async run() {
+    // eslint-disable-next-line no-console
     console.log('remote:')
+    // eslint-disable-next-line no-console
     console.log('remote: Securely pushing .env')
-    //console.log('remote: See changes on Dotenv by visiting:')
+    // eslint-disable-next-line no-console
     console.log('remote:')
 
     axios(this._pushOptions)
     .then(_response => {
+      // eslint-disable-next-line no-console
       console.log('Changes pushed.')
     })
     .catch(function (error) {

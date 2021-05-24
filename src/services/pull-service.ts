@@ -8,8 +8,11 @@ import {vars} from '../vars'
 
 class PullService {
   async run() {
+    // eslint-disable-next-line no-console
     console.log('remote:')
+    // eslint-disable-next-line no-console
     console.log('remote: Securely pulling .env')
+    // eslint-disable-next-line no-console
     console.log('remote:')
 
     axios(this._pullOptions)
@@ -22,12 +25,15 @@ class PullService {
 
         const diff = gitDiff(oldData, newData)
         if (diff) {
+          // eslint-disable-next-line no-console
           console.log('Updated.\n\n' + diff)
         } else {
+          // eslint-disable-next-line no-console
           console.log('Already up to date.')
         }
       }
 
+      // eslint-disable-next-line no-console
       console.log('Done.')
     })
     .catch(function (error) {
