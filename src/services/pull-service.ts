@@ -22,13 +22,13 @@ class PullService {
 
         const diff = gitDiff(oldData, newData)
         if (diff) {
-          signale.success('pulled changes.\n\n' + diff)
+          console.log('Updated.\n\n' + diff)
         } else {
-          signale.success('Already up to date.')
+          console.log('Already up to date.')
         }
       }
 
-      signale.success('pulled.')
+      console.log('Done.')
     })
     .catch(function (error) {
       if (error.response) {
