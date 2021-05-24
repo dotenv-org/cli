@@ -7,6 +7,9 @@ export default class Pull extends Command {
   static description = 'pull .env'
 
   async run() {
+    // 0. check latest version
+    await new CheckLatestVersionService().run()
+
     // 1. create gitignore
     new AppendToGitignoreService().run()
 
