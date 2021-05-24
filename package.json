@@ -1,7 +1,7 @@
 {
   "name": "@dotenv/cli",
   "description": "CLI to interact with dotenv",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "author": "motdotla @motdotla",
   "bin": {
     "dotenv-cli": "./bin/run"
@@ -12,6 +12,7 @@
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^3",
     "axios": "^0.21.1",
+    "compare-versions": "^3.6.0",
     "dotenv": "^9.0.0",
     "git-diff": "^2.0.6",
     "prompts": "^2.4.1",

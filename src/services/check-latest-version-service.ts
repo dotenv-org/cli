@@ -1,4 +1,5 @@
 import * as signale from 'signale'
+import * as compareVersions from 'compare-versions'
 const axios = require('axios')
 const packageJson = require('../../package.json')
 
@@ -9,8 +10,8 @@ class CheckLatestVersionService {
     const resp = await axios(this._versionOptions)
 
     if (resp.status === 200) {
-      if (packageJson.version !== resp.data) {
-        signale.note('New version available. Run npm install @dotenv/cli')
+      if (compareVersions.compare(resp.data, packageJson.version, '>')) {
+        signale.note('New version available. To update: npm install @dotenv/cli -g')
       }
     }
   }
