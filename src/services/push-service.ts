@@ -7,11 +7,14 @@ import {vars} from '../vars'
 
 class PushService {
   async run() {
-    signale.wait('pushing…')
+    console.log('remote:')
+    console.log('remote: Securely pushing .env')
+    //console.log('remote: See changes on Dotenv by visiting:')
+    console.log('remote:')
 
     axios(this._pushOptions)
     .then(_response => {
-      signale.success('pushed.')
+      console.log('Done.')
     })
     .catch(function (error) {
       if (error.response) {

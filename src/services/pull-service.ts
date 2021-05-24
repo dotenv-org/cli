@@ -8,7 +8,9 @@ import {vars} from '../vars'
 
 class PullService {
   async run() {
-    signale.wait('pulling…')
+    console.log('remote:')
+    console.log('remote: Securely pulling .env')
+    console.log('remote:')
 
     axios(this._pullOptions)
     .then(response => {
@@ -22,7 +24,7 @@ class PullService {
         if (diff) {
           signale.success('pulled changes.\n\n' + diff)
         } else {
-          signale.success('no changes.')
+          signale.success('Already up to date.')
         }
       }
 
