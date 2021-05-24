@@ -6,10 +6,10 @@ import {vars} from '../vars'
 
 class CheckLatestVersionService {
   async run() {
-    let res = await axios(this._versionOptions)
+    const resp = await axios(this._versionOptions)
 
-    if (res.status == 200) {
-      if (packageJson.version != res.data) {
+    if (resp.status === 200) {
+      if (packageJson.version !== resp.data) {
         signale.note('New version available. Run npm install @dotenv/cli')
       }
     }
