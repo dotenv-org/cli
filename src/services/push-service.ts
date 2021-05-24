@@ -14,7 +14,7 @@ class PushService {
 
     axios(this._pushOptions)
     .then(_response => {
-      console.log('Done.')
+      console.log('Changes pushed.')
     })
     .catch(function (error) {
       if (error.response) {
