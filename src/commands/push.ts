@@ -15,7 +15,7 @@ export default class Push extends Command {
     new AppendToGitignoreService().run()
 
     // 2. create envs
-    new WriteEnvsService().run()
+    new WriteEnvsService({quiet: true}).run()
 
     // 3. push
     new PushService().run()

@@ -3,6 +3,10 @@ import * as crypto from 'crypto'
 import * as signale from 'signale'
 
 class WriteEnvsService {
+  constructor(public quiet: boolean = false) {
+    this.quiet = quiet
+  }
+
   run() {
     const dir = process.cwd()
 
@@ -28,7 +32,9 @@ DOTENV_PROJECT_NAME=${projectName}`
 
     // 1. write .env
     if (fs.existsSync(dotenvFile)) {
-      signale.success('Existing .env.')
+      if (!this.quiet) {
+        signale.success('Existing .env.')
+      }
     } else {
       fs.writeFileSync(dotenvFile, dotenvData)
       signale.success('Created .env.')
@@ -36,7 +42,9 @@ DOTENV_PROJECT_NAME=${projectName}`
 
     // 2. write .env.me
     if (fs.existsSync(meFile)) {
-      signale.success('Existing .env.me.')
+      if (!this.quiet) {
+        signale.success('Existing .env.me.')
+      }
     } else {
       fs.writeFileSync(meFile, meData)
       signale.success('Created .env.me.')
@@ -44,7 +52,9 @@ DOTENV_PROJECT_NAME=${projectName}`
 
     // 3. write .env.project
     if (fs.existsSync(projectFile)) {
-      signale.success('Existing .env.project.')
+      if (!this.quiet) {
+        signale.success('Existing .env.project.')
+      }
     } else {
       fs.writeFileSync(projectFile, projectData)
       signale.success('Created .env.project.')
