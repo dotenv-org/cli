@@ -7,6 +7,9 @@ export default class Init extends Command {
   static description = 'initialize .env.me and .env.project'
 
   async run() {
+    // 0. check latest version
+    await new CheckLatestVersionService().run()
+
     // 1. create gitignore
     new AppendToGitignoreService().run()
 
