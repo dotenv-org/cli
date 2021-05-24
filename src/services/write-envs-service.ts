@@ -2,8 +2,16 @@ import * as fs from 'fs'
 import * as crypto from 'crypto'
 import * as signale from 'signale'
 
+interface WriteEnvsServiceParams {
+  quiet?: boolean
+}
+
 class WriteEnvsService {
-  constructor(public quiet: boolean = false) {
+  public quiet?: boolean;
+
+  constructor(params: WriteEnvsServiceParams = {} as WriteEnvsServiceParams) {
+    let { quiet = false } = params
+
     this.quiet = quiet
   }
 
