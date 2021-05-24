@@ -2,6 +2,7 @@ import {Command} from '@oclif/command'
 import {AppendToGitignoreService} from '../services/append-to-gitignore-service'
 import {WriteEnvsService} from '../services/write-envs-service'
 import {PullService} from '../services/pull-service'
+import {CheckLatestVersionService} from '../services/check-latest-version-service'
 
 export default class Pull extends Command {
   static description = 'pull .env'
