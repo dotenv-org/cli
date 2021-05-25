@@ -7,11 +7,17 @@ import {vars} from '../vars'
 
 class PushService {
   async run() {
-    signale.wait('pushing…')
+    // eslint-disable-next-line no-console
+    console.log('remote:')
+    // eslint-disable-next-line no-console
+    console.log('remote: Securely pushing .env')
+    // eslint-disable-next-line no-console
+    console.log('remote:')
 
     axios(this._pushOptions)
     .then(_response => {
-      signale.success('pushed.')
+      // eslint-disable-next-line no-console
+      console.log('Changes pushed.')
     })
     .catch(function (error) {
       if (error.response) {

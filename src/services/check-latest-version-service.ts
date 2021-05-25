@@ -1,4 +1,3 @@
-import * as signale from 'signale'
 import * as compareVersions from 'compare-versions'
 const axios = require('axios')
 const packageJson = require('../../package.json')
@@ -11,7 +10,12 @@ class CheckLatestVersionService {
 
     if (resp.status === 200) {
       if (compareVersions.compare(resp.data, packageJson.version, '>')) {
-        signale.note('New version available. To update: npm install @dotenv/cli -g')
+        // eslint-disable-next-line no-console
+        console.log('New version of dotenv-cli now available')
+        // eslint-disable-next-line no-console
+        console.log('    Run `npm install @dotenv/cli -g` to install')
+        // eslint-disable-next-line no-console
+        console.log('')
       }
     }
   }

@@ -3,14 +3,14 @@ import * as crypto from 'crypto'
 import * as signale from 'signale'
 
 interface WriteEnvsServiceParams {
-  quiet?: boolean
+  quiet?: boolean;
 }
 
 class WriteEnvsService {
   public quiet?: boolean;
 
   constructor(params: WriteEnvsServiceParams = {} as WriteEnvsServiceParams) {
-    let { quiet = false } = params
+    const {quiet = false} = params
 
     this.quiet = quiet
   }
