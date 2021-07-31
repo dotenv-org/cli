@@ -6,7 +6,6 @@ Dotenv cli is a command line tool that syncs your `.env` files across machines a
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/@dotenv/cli.svg)](https://npmjs.org/package/@dotenv/cli)
-[![CircleCI](https://circleci.com/gh/dotenv-org/cli/tree/master.svg?style=shield)](https://circleci.com/gh/dotenv-org/cli/tree/master)
 [![Downloads/week](https://img.shields.io/npm/dw/@dotenv/cli.svg)](https://npmjs.org/package/@dotenv/cli)
 [![License](https://img.shields.io/npm/l/@dotenv/cli.svg)](https://github.com/dotenv-org/cli/blob/master/package.json)
 
