@@ -6,6 +6,12 @@ const axios = require('axios')
 import {vars} from '../vars'
 
 class VerifyService {
+  organizationSlug: string
+
+  constructor(organizationSlug: string) {
+    this.organizationSlug = organizationSlug
+  }
+
   async run() {
     const response = await prompts({
       type: 'text',
@@ -58,6 +64,7 @@ class VerifyService {
   _initOptions(email) {
     const url = vars.apiUrl + '/v1/init'
     const data = {
+      organizationSlug: this.organizationSlug,
       email: email,
       projectUid: this._DOTENV_PROJECT,
       meUid: this._DOTENV_ME,
