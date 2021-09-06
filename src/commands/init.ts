@@ -7,7 +7,13 @@ import {CheckLatestVersionService} from '../services/check-latest-version-servic
 export default class Init extends Command {
   static description = 'initialize .env.me and .env.project'
 
+  static args = [
+    {name: 'organizationSlug'},
+  ]
+
   async run() {
+    const {args} = this.parse(Init)
+
     // 0. check latest version
     await new CheckLatestVersionService().run()
 
@@ -18,6 +24,6 @@ export default class Init extends Command {
     new WriteEnvsService().run()
 
     // 3. verify
-    new VerifyService().run()
+    new VerifyService(args.organizationSlug).run()
   }
 }

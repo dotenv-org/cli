@@ -74,3 +74,17 @@ OPTIONS
 ```
 NODE_TLS_REJECT_UNAUTHORIZED=0 DOTENV_API_URL=https://cli.dotenv.development ./bin/run
 ```
+
+### Testing
+
+```
+yarn test
+```
+
+### Publishing
+
+Only for those with permission.
+
+```
+npm publish
+```
