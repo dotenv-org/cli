@@ -32,7 +32,8 @@ KEY=value`
 # this file uniquely identifies you for this project
 # keep it safe, but if you lose it or expose it publicly, you can always generate a new one at dotenv.org
 DOTENV_ME=me_${meUid}`
-    const projectName = dir.split('/')[dir.split('/').length - 1]
+    const splitDir = dir.split('\\').join('/').split('/') // handle windows and unix paths
+    const projectName = splitDir[splitDir.length - 1]
     const projectData = `# added by dotenv - you SHOULD commit this file to code
 # this file uniquely identifies your project at dotenv.org
 DOTENV_PROJECT=prj_${projectUid}
