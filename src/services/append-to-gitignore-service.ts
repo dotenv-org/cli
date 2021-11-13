@@ -3,16 +3,16 @@ import * as fs from 'fs'
 class AppendToGitignoreService {
   run() {
     const file = '.gitignore'
-    const addedForDotenvMsg = '# Ignore (and don\'t ignore) for dotenv.'
 
     // 1. create .gitignore if doesn't exist
     if (!fs.existsSync(file)) {
       fs.writeFileSync(file, '')
     }
 
-    if (fs.readFileSync(file).indexOf(addedForDotenvMsg) === -1) {
+    const fileContent = fs.readFileSync(file)
+    if (fileContent.indexOf('.env') === -1 || fileContent.indexOf('.env.me') === -1 || fileContent.indexOf('!.env.project') === -1) {
       // 2. add ignores from dotenv-cli (keep the ugly spacing to avoid added indentation on write)
-      const ignore = `${addedForDotenvMsg}
+      const ignore = `# Ignore (and don't ignore) for dotenv.
 .env
 .env.me
 !.env.project`
