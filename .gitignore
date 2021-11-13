@@ -7,7 +7,6 @@
 /tmp
 node_modules
 
-# Ignore (and don't ignore) for dotenv.
 .env
 .env.me
 !.env.project
