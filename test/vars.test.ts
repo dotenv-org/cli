@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-
+import process from 'process'
 import {vars} from '../src/vars'
 
 const env = process.env

@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "declaration": true,
+    "esModuleInterop": true,
     "importHelpers": true,
     "module": "commonjs",
     "outDir": "lib",
@@ -9,7 +10,5 @@
     "target": "es2017",
     "noImplicitAny": false
   },
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["src/**/*"]
 }
