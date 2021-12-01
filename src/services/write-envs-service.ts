@@ -1,6 +1,6 @@
-import * as fs from 'fs'
-import * as crypto from 'crypto'
-import * as signale from 'signale'
+import {WriteEnvService} from '../services/write-env-service'
+import {WriteEnvMeService} from '../services/write-env-me-service'
+import {WriteEnvProjectService} from '../services/write-env-project-service'
 
 interface WriteEnvsServiceParams {
   quiet?: boolean;
@@ -16,58 +16,14 @@ class WriteEnvsService {
   }
 
   run() {
-    const dir = process.cwd()
-
-    const meUid = crypto.randomBytes(32).toString('hex') // 64 length
-    const projectUid = crypto.randomBytes(32).toString('hex') // 64 length
-
-    const dotenvFile = '.env'
-    const meFile = '.env.me'
-    const projectFile = '.env.project'
-
-    const dotenvData = `# added by dotenv - do not commit this file to code
-KEY=value`
-
-    const meData = `# added by dotenv - do not commit this file to code
-# this file uniquely identifies you for this project
-# keep it safe, but if you lose it or expose it publicly, you can always generate a new one at dotenv.org
-DOTENV_ME=me_${meUid}`
-    const splitDir = dir.split('\\').join('/').split('/') // handle windows and unix paths
-    const projectName = splitDir[splitDir.length - 1]
-    const projectData = `# added by dotenv - you SHOULD commit this file to code
-# this file uniquely identifies your project at dotenv.org
-DOTENV_PROJECT=prj_${projectUid}
-DOTENV_PROJECT_NAME=${projectName}`
-
     // 1. write .env
-    if (fs.existsSync(dotenvFile)) {
-      if (!this.quiet) {
-        signale.success('Existing .env.')
-      }
-    } else {
-      fs.writeFileSync(dotenvFile, dotenvData)
-      signale.success('Created .env.')
-    }
+    new WriteEnvService({quiet: this.quiet}).run()
 
     // 2. write .env.me
-    if (fs.existsSync(meFile)) {
-      if (!this.quiet) {
-        signale.success('Existing .env.me.')
-      }
-    } else {
-      fs.writeFileSync(meFile, meData)
-      signale.success('Created .env.me.')
-    }
+    new WriteEnvMeService({quiet: this.quiet}).run()
 
     // 3. write .env.project
-    if (fs.existsSync(projectFile)) {
-      if (!this.quiet) {
-        signale.success('Existing .env.project.')
-      }
-    } else {
-      fs.writeFileSync(projectFile, projectData)
-      signale.success('Created .env.project.')
-    }
+    new WriteEnvProjectService({quiet: this.quiet}).run()
   }
 }
 
