@@ -15,7 +15,7 @@ class WriteEnvsService {
     this.quiet = quiet
   }
 
-  run() {
+  async run() {
     // 1. write .env
     new WriteEnvService({quiet: this.quiet}).run()
 

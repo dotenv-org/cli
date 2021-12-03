@@ -26,7 +26,10 @@ KEY=value`
       }
     } else {
       fs.writeFileSync(dotenvFile, dotenvData)
-      signale.success('Created .env.')
+
+      if (!this.quiet) {
+        signale.success('Created .env.')
+      }
     }
   }
 }

@@ -15,7 +15,7 @@ class WriteEnvMeService {
     this.quiet = quiet
   }
 
-  run() {
+  async run() {
     const meUid = crypto.randomBytes(32).toString('hex') // 64 length
     const meFile = '.env.me'
     const meData = `# added by dotenv - do not commit this file to code

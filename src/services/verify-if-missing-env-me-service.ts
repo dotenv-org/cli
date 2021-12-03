@@ -1,70 +1,42 @@
 import * as fs from 'fs'
-import * as dotenv from 'dotenv'
 import * as prompts from 'prompts'
 import * as signale from 'signale'
+import * as dotenv from 'dotenv'
 const axios = require('axios')
 
 import {vars} from '../vars'
 import {WriteEnvMeService} from '../services/write-env-me-service'
 
-class PushService {
+class VerifyIfMissingEnvMeService {
   async run() {
     const meFile = '.env.me'
 
-    if (fs.existsSync(meFile)) {
-      this._push()
-    } else {
+    if (!fs.existsSync(meFile)) {
       await new WriteEnvMeService().run()
 
-      this._auth()
+      const response = await prompts({
+        type: 'text',
+        name: 'value',
+        message: 'What is your email address?',
+      })
+
+      signale.await('sending a code.')
+
+      // submit email for identification
+      axios(this._initOptions(response.value))
+      .then(_response => {
+        signale.complete('sent. check your email.')
+
+        this._promptForShortCode()
+      })
+      .catch(function (error) {
+        if (error.response) {
+          signale.fatal(error.response.data)
+        } else {
+          signale.fatal(error)
+        }
+      })
     }
-  }
-
-  async _push() {
-    // eslint-disable-next-line no-console
-    console.log('remote:')
-    // eslint-disable-next-line no-console
-    console.log('remote: Securely pushing .env')
-    // eslint-disable-next-line no-console
-    console.log('remote:')
-
-    axios(this._pushOptions)
-    .then(_response => {
-      // eslint-disable-next-line no-console
-      console.log('Changes pushed.')
-    })
-    .catch(function (error) {
-      if (error.response) {
-        signale.fatal(error.response.data)
-      } else {
-        signale.fatal(error)
-      }
-    })
-  }
-
-  async _auth() {
-    const response = await prompts({
-      type: 'text',
-      name: 'value',
-      message: 'What is your email address?',
-    })
-
-    signale.await('sending a code.')
-
-    // submit email for identification
-    axios(this._authOptions(response.value))
-    .then(_response => {
-      signale.complete('sent. check your email.')
-
-      this._promptForShortCode()
-    })
-    .catch(function (error) {
-      if (error.response) {
-        signale.fatal(error.response.data)
-      } else {
-        signale.fatal(error)
-      }
-    })
   }
 
   async _promptForShortCode() {
@@ -80,8 +52,7 @@ class PushService {
     axios(this._verifyOptions(response.value))
     .then(response => {
       signale.success('verified code.')
-
-      this._push()
+      signale.log(`\nYou can view your project at ${response.data.data.loginUrl} (url expires in 5 minutes)`)
     })
     .catch(function (error) {
       if (error.response) {
@@ -92,9 +63,10 @@ class PushService {
     })
   }
 
-  _authOptions(email) {
-    const url = vars.apiUrl + '/v1/auth'
+  _initOptions(email) {
+    const url = vars.apiUrl + '/v1/init'
     const data = {
+      organizationSlug: this.organizationSlug,
       email: email,
       projectUid: this._DOTENV_PROJECT,
       meUid: this._DOTENV_ME,
@@ -127,23 +99,6 @@ class PushService {
     return options
   }
 
-  get _pushOptions() {
-    const url = vars.apiUrl + '/v1/push'
-    const data = {
-      projectUid: this._DOTENV_PROJECT,
-      meUid: this._DOTENV_ME,
-      dotenv: fs.readFileSync('.env', 'UTF-8'),
-    }
-    const options = {
-      method: 'POST',
-      headers: {'content-type': 'application/json'},
-      data: data,
-      url,
-    }
-
-    return options
-  }
-
   get _envMe() {
     return dotenv.config({path: '.env.me'})
   }
@@ -165,4 +120,4 @@ class PushService {
   }
 }
 
-export {PushService}
+export {VerifyIfMissingEnvMeService}

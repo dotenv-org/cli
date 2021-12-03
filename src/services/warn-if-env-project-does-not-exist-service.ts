@@ -12,7 +12,7 @@ class WarnIfEnvProjectDoesNotExistService {
     this._this = params._this
   }
 
-  run() {
+  async run() {
     const projectFile = '.env.project'
 
     // 1. write .env.project

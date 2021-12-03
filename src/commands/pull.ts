@@ -1,6 +1,5 @@
 import {Command} from '@oclif/command'
 import {AppendToGitignoreService} from '../services/append-to-gitignore-service'
-import {WriteEnvsService} from '../services/write-envs-service'
 import {WarnIfEnvProjectDoesNotExistService} from '../services/warn-if-env-project-does-not-exist-service'
 import {PullService} from '../services/pull-service'
 import {CheckLatestVersionService} from '../services/check-latest-version-service'
@@ -13,15 +12,12 @@ export default class Pull extends Command {
     await new CheckLatestVersionService().run()
 
     // 1. create gitignore
-    new AppendToGitignoreService().run()
+    await new AppendToGitignoreService().run()
 
     // 2. check if .env.project file exists
-    new WarnIfEnvProjectDoesNotExistService({_this: this}).run()
+    await new WarnIfEnvProjectDoesNotExistService({_this: this}).run()
 
-    // 3. create envs
-    new WriteEnvsService({quiet: true}).run()
-
-    // 4. pull
-    new PullService().run()
+    // 3. pull
+    await new PullService().run()
   }
 }
