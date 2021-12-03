@@ -78,7 +78,7 @@ class PushService {
 
     // submit shortCode for verification
     axios(this._verifyOptions(response.value))
-    .then(response => {
+    .then(_response => {
       signale.success('verified code.')
 
       this._push()

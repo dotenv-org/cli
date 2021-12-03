@@ -98,7 +98,7 @@ class PullService {
 
     // submit shortCode for verification
     axios(this._verifyOptions(response.value))
-    .then(response => {
+    .then(_response => {
       signale.success('verified code.')
 
       this._pull()
@@ -146,8 +146,6 @@ class PullService {
 
     return options
   }
-
-
 
   get _pullOptions() {
     const url = vars.apiUrl + '/v1/pull'
