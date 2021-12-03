@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 
 class AppendToGitignoreService {
-  run() {
+  async run() {
     const file = '.gitignore'
 
     const envFormat = '.env'
