@@ -28,6 +28,8 @@ class PushService {
     // eslint-disable-next-line no-console
     console.log('remote:')
 
+    const _this = this
+
     axios(this._pushOptions)
     .then(_response => {
       // eslint-disable-next-line no-console
@@ -35,7 +37,7 @@ class PushService {
     })
     .catch(function (error) {
       if (error.response) {
-        signale.fatal(error.response.data)
+        signale.fatal(_this._formatErrorBody(error.response.data))
       } else {
         signale.fatal(error)
       }
@@ -90,6 +92,10 @@ class PushService {
         signale.fatal(error)
       }
     })
+  }
+
+  _formatErrorBody(body) {
+    return body["errors"][0]["message"]
   }
 
   _authOptions(email) {

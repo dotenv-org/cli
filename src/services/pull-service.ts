@@ -30,6 +30,8 @@ class PullService {
     // eslint-disable-next-line no-console
     console.log('remote:')
 
+    const _this = this
+
     axios(this._pullOptions)
     .then(response => {
       if (response.data.data.dotenv) {
@@ -55,7 +57,7 @@ class PullService {
     })
     .catch(function (error) {
       if (error.response) {
-        signale.fatal(error.response.data)
+        signale.fatal(_this._formatErrorBody(error.response.data))
       } else {
         signale.fatal(error)
       }
@@ -110,6 +112,10 @@ class PullService {
         signale.fatal(error)
       }
     })
+  }
+
+  _formatErrorBody(body) {
+    return body["errors"][0]["message"]
   }
 
   _authOptions(email) {
