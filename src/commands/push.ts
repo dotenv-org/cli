@@ -1,6 +1,7 @@
 import {Command} from '@oclif/command'
 import {AppendToGitignoreService} from '../services/append-to-gitignore-service'
 import {WarnIfEnvProjectDoesNotExistService} from '../services/warn-if-env-project-does-not-exist-service'
+import {WarnIfEnvDoesNotExistService} from '../services/warn-if-env-does-not-exist-service'
 import {PushService} from '../services/push-service'
 import {CheckLatestVersionService} from '../services/check-latest-version-service'
 
