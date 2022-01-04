@@ -14,8 +14,9 @@ export default class Push extends Command {
     // 1. create gitignore
     await new AppendToGitignoreService().run()
 
-    // 2. check if .env.project file exists
+    // 2. check if .env.project & .env files exists
     await new WarnIfEnvProjectDoesNotExistService({_this: this}).run()
+    await new WarnIfEnvDoesNotExistService({_this: this}).run()
 
     // 3. push
     await new PushService().run()
