@@ -5,7 +5,7 @@ import {VerifyService} from '../services/verify-service'
 import {CheckLatestVersionService} from '../services/check-latest-version-service'
 
 export default class Init extends Command {
-  static description = 'initialize .env.me and .env.project'
+  static description = 'DEPRECATED: initialize .env.me and .env.project'
 
   static args = [
     {name: 'organizationSlug'},
@@ -16,6 +16,9 @@ export default class Init extends Command {
 
     // 0. check latest version
     await new CheckLatestVersionService().run()
+
+    // Deprecation notice
+    console.log('DEPRECATION NOTICE: \'dotenv-cli init\' is deprecated. Going forward, run \'dotenv-cli new\' instead.')
 
     // 1. create gitignore
     new AppendToGitignoreService().run()
