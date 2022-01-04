@@ -25,20 +25,16 @@ npm install @dotenv/cli --save-dev
 
 ## Usage
 
-In your terminal (and in your project folder), initialize dotenv the same way you
-initialize git.
+In your terminal (and in your project folder), create a new .env.project file.
 
 ```bash
-dotenv-cli init
+dotenv-cli new
 ```
 
-This will create (if not existing) a
+This will ask you to visit Dotenv to create your project. Follow that for
+instructions on setting your `.env.project` file.
 
-* `.env` file
-* `.env.me` file
-* `.env.project` file 
-
-Make changes to your `.env` file and when you do, run:
+Then make changes to your `.env` file and when you do, run:
 
 ```bash
 dotenv-cli push
