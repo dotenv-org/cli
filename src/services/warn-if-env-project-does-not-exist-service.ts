@@ -17,7 +17,7 @@ class WarnIfEnvProjectDoesNotExistService {
 
     // 1. write .env.project
     if (!fs.existsSync(projectFile)) {
-      signale.fatal('Missing .env.project. To create it, run the command: dotenv-cli init')
+      signale.fatal('Missing .env.project. To create it, run the command: dotenv-cli new')
 
       this._this.exit(1)
     }
