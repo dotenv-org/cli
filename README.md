@@ -62,6 +62,22 @@ OPTIONS
   --all  see all commands in CLI
 ```
 
+### `dotenv-cli pull [ENVIRONMENT] [FILENAME]`
+
+By default `dotenv-cli pull` will pull your development environment to `.env`.
+
+Want to pull your staging secrets? Run..
+
+```bash
+dotenv-cli pull staging
+```
+
+Want to pull your production secrets but output them to `.env`. Run..
+
+```bash
+dotenv-cli pull production .env
+```
+
 ## Development
 
 ```
