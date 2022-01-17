@@ -7,6 +7,5 @@
 /tmp
 node_modules
 
-.env
-.env.me
+.env*
 !.env.project

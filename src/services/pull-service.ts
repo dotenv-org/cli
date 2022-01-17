@@ -10,12 +10,20 @@ import {WriteEnvMeService} from '../services/write-env-me-service'
 import {WriteEnvService} from '../services/write-env-service'
 
 class PullService {
+  environment: string
+
+  constructor(environment: string, filename: string) {
+    this.environment = environment
+    this.filename = filename
+  }
+
   async run() {
     const meFile = '.env.me'
 
     if (fs.existsSync(meFile)) {
       this._pull()
     } else {
+      // TODO: prompt the user if they want to create a .env.me file - rather than raise an error. in dev maybe prompt but for prod, etc it should raise a stacktrace most likely. since machines won't be able to answer the prompts
       await new WriteEnvMeService().run()
 
       this._auth()
@@ -26,7 +34,7 @@ class PullService {
     // eslint-disable-next-line no-console
     console.log('remote:')
     // eslint-disable-next-line no-console
-    console.log('remote: Securely pulling .env')
+    console.log(`remote: Securely pulling ${this._smartPullMessage}`)
     // eslint-disable-next-line no-console
     console.log('remote:')
 
@@ -35,20 +43,27 @@ class PullService {
     axios(this._pullOptions)
     .then(response => {
       if (response.data.data.dotenv) {
-        new WriteEnvService({quiet: true}).run()
-
-        const oldData = fs.readFileSync('.env', 'UTF-8')
         const newData = response.data.data.dotenv
 
-        fs.writeFileSync('.env', newData)
+        // if development mode and user is NOT passing a custom filename
+        if (_this.development && !this.filename) {
+          new WriteEnvService({quiet: true}).run()
 
-        const diff = gitDiff(oldData, newData)
-        if (diff) {
-          // eslint-disable-next-line no-console
-          console.log('Updated.\n\n' + diff)
+          const oldData = fs.readFileSync(_this._envFileName, 'UTF-8')
+
+          fs.writeFileSync(_this._envFileName, newData)
+
+          const diff = gitDiff(oldData, newData)
+          if (diff) {
+            // eslint-disable-next-line no-console
+            console.log('Updated.\n\n' + diff)
+          } else {
+            // eslint-disable-next-line no-console
+            console.log('Already up to date.')
+          }
         } else {
-          // eslint-disable-next-line no-console
-          console.log('Already up to date.')
+          // other environments: just write
+          fs.writeFileSync(_this._envOutputFileName, newData)
         }
       }
 
@@ -187,6 +202,35 @@ class PullService {
 
   get _DOTENV_PROJECT_NAME() {
     return (this._envProject.parsed || {}).DOTENV_PROJECT_NAME
+  }
+
+  get _development() {
+    return this.environment === 'development'
+  }
+
+  get _envFileName() {
+    if (this._development) {
+      return '.env'
+    } else {
+      return `.env.${this.environment}`
+    }
+  }
+
+  get _envOutputFileName() {
+    // if user has set a filename for output then use that
+    if (this.filename) {
+      return this.filename
+    } else {
+      return this._envFileName
+    }
+  }
+
+  get _smartPullMessage() {
+    if (this.filename) {
+      return `${this._envFileName} to ${this._envOutputFileName}`
+    } else {
+      return this._envFileName
+    }
   }
 }
 

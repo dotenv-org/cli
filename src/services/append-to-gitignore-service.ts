@@ -4,12 +4,10 @@ class AppendToGitignoreService {
   async run() {
     const file = '.gitignore'
 
-    const envFormat = '.env'
-    const envMeFormat = '.env.me'
+    const envFormat = '.env*' // asterisk
     const envProjectFormat = '!.env.project'
 
     let envExists = false
-    let envMeExists = false
     let envProjectExists = false
 
     // 1. create .gitignore if doesn't exist
@@ -28,10 +26,6 @@ class AppendToGitignoreService {
         envExists = true
       }
 
-      if (trimLine === envMeFormat) {
-        envMeExists = true
-      }
-
       if (trimLine === envProjectFormat) {
         envProjectExists = true
       }
@@ -40,9 +34,6 @@ class AppendToGitignoreService {
     // 4. add ignore if it does not already exist
     if (envExists === false) {
       fs.appendFileSync(file, '\n' + envFormat)
-    }
-    if (envMeExists === false) {
-      fs.appendFileSync(file, '\n' + envMeFormat)
     }
     if (envProjectExists === false) {
       fs.appendFileSync(file, '\n' + envProjectFormat)
