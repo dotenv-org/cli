@@ -1,6 +1,5 @@
 import {Command} from '@oclif/command'
 import {AppendToGitignoreService} from '../services/append-to-gitignore-service'
-import {WriteEnvsService} from '../services/write-envs-service'
 import {CheckLatestVersionService} from '../services/check-latest-version-service'
 import {OutputNewProjectLinkService} from '../services/output-new-project-link-service'
 

@@ -38,20 +38,18 @@ class PullService {
     // eslint-disable-next-line no-console
     console.log('remote:')
 
-    const _this = this
-
     axios(this._pullOptions)
     .then(response => {
       if (response.data.data.dotenv) {
         const newData = response.data.data.dotenv
 
         // if development mode and user is NOT passing a custom filename
-        if (_this.development && !this.filename) {
+        if (this.development && !this.filename) {
           new WriteEnvService({quiet: true}).run()
 
-          const oldData = fs.readFileSync(_this._envFileName, 'UTF-8')
+          const oldData = fs.readFileSync(this._envFileName, 'UTF-8')
 
-          fs.writeFileSync(_this._envFileName, newData)
+          fs.writeFileSync(this._envFileName, newData)
 
           const diff = gitDiff(oldData, newData)
           if (diff) {
@@ -63,7 +61,7 @@ class PullService {
           }
         } else {
           // other environments: just write
-          fs.writeFileSync(_this._envOutputFileName, newData)
+          fs.writeFileSync(this._envOutputFileName, newData)
         }
       }
 
@@ -72,7 +70,7 @@ class PullService {
     })
     .catch(function (error) {
       if (error.response) {
-        signale.fatal(_this._formatErrorBody(error.response.data))
+        signale.fatal(error.response.data.errors[0].message)
       } else {
         signale.fatal(error)
       }
@@ -130,7 +128,7 @@ class PullService {
   }
 
   _formatErrorBody(body) {
-    return body["errors"][0]["message"]
+    return body.errors[0].message
   }
 
   _authOptions(email) {
@@ -212,26 +210,26 @@ class PullService {
   get _envFileName() {
     if (this._development) {
       return '.env'
-    } else {
-      return `.env.${this.environment}`
     }
+
+    return `.env.${this.environment}`
   }
 
   get _envOutputFileName() {
     // if user has set a filename for output then use that
     if (this.filename) {
       return this.filename
-    } else {
-      return this._envFileName
     }
+
+    return this._envFileName
   }
 
   get _smartPullMessage() {
     if (this.filename) {
       return `${this._envFileName} to ${this._envOutputFileName}`
-    } else {
-      return this._envFileName
     }
+
+    return this._envFileName
   }
 }
 

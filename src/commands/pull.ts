@@ -14,14 +14,14 @@ export default class Pull extends Command {
       description: 'Pull .env.ci, .env.staging, and .env.production',
       hidden: false,
       default: 'development',
-      options: ['development', 'ci', 'staging', 'production']
+      options: ['development', 'ci', 'staging', 'production'],
     },
     {
       name: 'filename',
       required: false,
-      description: 'Set output filename. Defaults to .env for development and .env.${environment} for other environments',
-      hidden: false
-    }
+      description: 'Set output filename. Defaults to .env for development and .env.{environment} for other environments',
+      hidden: false,
+    },
   ]
 
   async run() {
