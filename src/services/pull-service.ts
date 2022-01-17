@@ -171,6 +171,7 @@ class PullService {
   get _pullOptions() {
     const url = vars.apiUrl + '/v1/pull'
     const data = {
+      environment: this.environment,
       projectUid: this._DOTENV_PROJECT,
       meUid: this._DOTENV_ME,
     }
