@@ -135,8 +135,8 @@ Examples:
 $ dotenv-cli pull staging --dotenv_me=me_cb8783d2e126dd6efee6027ecbb7d96b381c3da4651810b18a111c9e2c096706
 # pulls remote staging envs to .env.staging
 
-$ dotenv-cli pull staging .env --dotenv_me=me_cb8783d2e126dd6efee6027ecbb7d96b381c3da4651810b18a111c9e2c096706
-# pulls remote staging envs to .env
+$ dotenv-cli pull production .env --dotenv_me=me_cb8783d2e126dd6efee6027ecbb7d96b381c3da4651810b18a111c9e2c096706
+# pulls remote production envs to .env
 ```
 
 ## Development
