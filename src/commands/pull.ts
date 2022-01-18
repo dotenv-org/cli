@@ -48,6 +48,6 @@ export default class Pull extends Command {
     await new WarnIfEnvProjectDoesNotExistService({_this: this}).run()
 
     // 3. pull
-    await new PullService(argv[0], argv[1], flags.dotenv_me).run()
+    await new PullService(argv[0], argv[1], flags.dotenv_me || '').run()
   }
 }

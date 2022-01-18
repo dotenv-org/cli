@@ -192,7 +192,7 @@ class PullService {
   }
 
   get _DOTENV_ME() {
-    if (this.dotenv_me) {
+    if (this.dotenv_me && this.dotenv_me.length > 0) {
       return this.dotenv_me
     }
 
