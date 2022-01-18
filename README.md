@@ -62,20 +62,81 @@ OPTIONS
   --all  see all commands in CLI
 ```
 
-### `dotenv-cli pull [ENVIRONMENT] [FILENAME]`
+### `dotenv-cli new`
 
-By default `dotenv-cli pull` will pull your development environment to `.env`.
+Create your `.env.project` file.
 
-Want to pull your staging secrets? Run..
+Example:
 
 ```bash
-dotenv-cli pull staging
+$ dotenv-cli new
 ```
 
-Want to pull your production secrets but output them to `.env`. Run..
+### `dotenv-cli push`
+
+Push your `.env` file.
+
+Example:
 
 ```bash
-dotenv-cli pull production .env
+$ dotenv-cli push
+```
+
+### `dotenv-cli pull [ENVIRONMENT] [FILENAME]`
+
+Pulls your development|staging|ci|production environment(s) to your machine.
+
+Example:
+
+```bash
+$ dotenv-cli pull
+# pulls remote development envs to .env
+```
+
+For more information run..
+
+```bash
+$ dotenv-cli help pull
+```
+
+#### Arguments
+
+##### [ENVIRONMENT]
+
+Pull .env.ci, .env.staging, and .env.production
+
+Example:
+
+```bash
+$ dotenv-cli pull staging
+# pulls remote staging envs to .env.staging
+```
+
+##### [FILENAME]
+
+Set output filename. Defaults to .env for development and .env.{environment} for other environments
+
+Example:
+
+```bash
+$ dotenv-cli pull production .env
+# pulls remote production envs to .env
+```
+
+#### Options
+
+##### --dotenv_me
+
+Directly pass your `DOTENV_ME` value to the command line, instead of reading from a `.env.me` file.
+
+Examples:
+
+```bash
+$ dotenv-cli pull staging --dotenv_me=me_cb8783d2e126dd6efee6027ecbb7d96b381c3da4651810b18a111c9e2c096706
+# pulls remote staging envs to .env.staging
+
+$ dotenv-cli pull staging .env --dotenv_me=me_cb8783d2e126dd6efee6027ecbb7d96b381c3da4651810b18a111c9e2c096706
+# pulls remote staging envs to .env
 ```
 
 ## Development
