@@ -97,3 +97,11 @@ Only for those with permission.
 ```
 npm publish
 ```
+
+## Contributing Guide
+
+See [CONTRIBUTING.md](CONTRIBUTING.md)
+
+## CHANGELOG
+
+See [CHANGELOG.md](CHANGELOG.md)
