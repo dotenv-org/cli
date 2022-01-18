@@ -132,10 +132,10 @@ Directly pass your `DOTENV_ME` value to the command line, instead of reading fro
 Examples:
 
 ```bash
-$ dotenv-cli pull staging --dotenv_me=me_cb8783d2e126dd6efee6027ecbb7d96b381c3da4651810b18a111c9e2c096706
+$ dotenv-cli pull staging --dotenv_me=me_1234
 # pulls remote staging envs to .env.staging
 
-$ dotenv-cli pull production .env --dotenv_me=me_cb8783d2e126dd6efee6027ecbb7d96b381c3da4651810b18a111c9e2c096706
+$ dotenv-cli pull production .env --dotenv_me=me_1234
 # pulls remote production envs to .env
 ```
 
