@@ -26,7 +26,7 @@ export default class Pull extends Command {
 
   static flags = {
     dotenv_me: flags.string({
-      char: 'me',
+      char: 'm',
       description: 'pass value for .env.me rather than reading from .env.me file',
       hidden: false,
       multiple: false,
