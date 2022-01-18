@@ -10,11 +10,8 @@ class CheckLatestVersionService {
 
     if (resp.status === 200) {
       if (compareVersions.compare(resp.data, packageJson.version, '>')) {
-        // eslint-disable-next-line no-console
         console.log('New version of dotenv-cli now available')
-        // eslint-disable-next-line no-console
         console.log('    Run `npm install @dotenv/cli -g` to install')
-        // eslint-disable-next-line no-console
         console.log('')
       }
     }

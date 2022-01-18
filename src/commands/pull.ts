@@ -1,4 +1,4 @@
-import {Command} from '@oclif/command'
+import {Command, flags} from '@oclif/command'
 import {AppendToGitignoreService} from '../services/append-to-gitignore-service'
 import {WarnIfEnvProjectDoesNotExistService} from '../services/warn-if-env-project-does-not-exist-service'
 import {PullService} from '../services/pull-service'
@@ -24,8 +24,19 @@ export default class Pull extends Command {
     },
   ]
 
+  static flags = {
+    dotenv_me: flags.string({
+      char: 'm',
+      description: 'pass value for .env.me rather than reading from .env.me file',
+      hidden: false,
+      multiple: false,
+      env: 'DOTENV_ME',
+      required: false,
+    }),
+  }
+
   async run() {
-    const {argv} = this.parse(Pull)
+    const {argv, flags} = this.parse(Pull)
 
     // 0. check latest version
     await new CheckLatestVersionService().run()
@@ -37,6 +48,6 @@ export default class Pull extends Command {
     await new WarnIfEnvProjectDoesNotExistService({_this: this}).run()
 
     // 3. pull
-    await new PullService(argv[0], argv[1]).run()
+    await new PullService(argv[0], argv[1], flags.dotenv_me).run()
   }
 }

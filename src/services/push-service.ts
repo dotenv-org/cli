@@ -21,16 +21,12 @@ class PushService {
   }
 
   async _push() {
-    // eslint-disable-next-line no-console
     console.log('remote:')
-    // eslint-disable-next-line no-console
     console.log('remote: Securely pushing .env')
-    // eslint-disable-next-line no-console
     console.log('remote:')
 
     axios(this._pushOptions)
     .then(_response => {
-      // eslint-disable-next-line no-console
       console.log('Changes pushed.')
     })
     .catch(function (error) {

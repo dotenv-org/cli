@@ -11,11 +11,15 @@ import {WriteEnvService} from '../services/write-env-service'
 
 class PullService {
   environment: string
+
   filename: string
 
-  constructor(environment: string, filename: string) {
+  dotenv_me: string
+
+  constructor(environment: string, filename: string, dotenv_me: string) {
     this.environment = environment
     this.filename = filename
+    this.dotenv_me = dotenv_me
   }
 
   async run() {
@@ -24,6 +28,7 @@ class PullService {
     if (fs.existsSync(meFile)) {
       this._pull()
     } else {
+      // eslint-disable-next-line no-warning-comments
       // TODO: prompt the user if they want to create a .env.me file - rather than raise an error. in dev maybe prompt but for prod, etc it should raise a stacktrace most likely. since machines won't be able to answer the prompts
       await new WriteEnvMeService().run()
 
@@ -32,11 +37,8 @@ class PullService {
   }
 
   async _pull() {
-    // eslint-disable-next-line no-console
     console.log('remote:')
-    // eslint-disable-next-line no-console
     console.log(`remote: Securely pulling ${this._smartPullMessage}`)
-    // eslint-disable-next-line no-console
     console.log('remote:')
 
     axios(this._pullOptions)
@@ -54,10 +56,8 @@ class PullService {
 
           const diff = gitDiff(oldData, newData)
           if (diff) {
-            // eslint-disable-next-line no-console
             console.log('Updated.\n\n' + diff)
           } else {
-            // eslint-disable-next-line no-console
             console.log('Already up to date.')
           }
         } else {
@@ -66,7 +66,6 @@ class PullService {
         }
       }
 
-      // eslint-disable-next-line no-console
       console.log('Done.')
     })
     .catch(function (error) {
@@ -137,7 +136,7 @@ class PullService {
     const data = {
       email: email,
       projectUid: this._DOTENV_PROJECT,
-      meUid: this._DOTENV_ME,
+      meuid: this._DOTENV_ME,
       projectName: this._DOTENV_PROJECT_NAME, // optional
     }
     const options = {
@@ -155,7 +154,7 @@ class PullService {
     const data = {
       shortCode: shortCode,
       projectUid: this._DOTENV_PROJECT,
-      meUid: this._DOTENV_ME,
+      meuid: this._DOTENV_ME,
     }
     const options = {
       method: 'POST',
@@ -193,6 +192,10 @@ class PullService {
   }
 
   get _DOTENV_ME() {
+    if (this.dotenv_me) {
+      return this.dotenv_me
+    }
+
     return (this._envMe.parsed || {}).DOTENV_ME
   }
 
