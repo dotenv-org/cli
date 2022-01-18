@@ -11,6 +11,7 @@ import {WriteEnvService} from '../services/write-env-service'
 
 class PullService {
   environment: string
+  filename: string
 
   constructor(environment: string, filename: string) {
     this.environment = environment
@@ -44,7 +45,7 @@ class PullService {
         const newData = response.data.data.dotenv
 
         // if development mode and user is NOT passing a custom filename
-        if (this.development && !this.filename) {
+        if (this._development && !this.filename) {
           new WriteEnvService({quiet: true}).run()
 
           const oldData = fs.readFileSync(this._envFileName, 'UTF-8')
