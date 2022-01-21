@@ -68,12 +68,8 @@ class PullService {
 
       console.log('Done.')
     })
-    .catch(function (error) {
-      if (error.response) {
-        signale.fatal(error.response.data.errors[0].message)
-      } else {
-        signale.fatal(error)
-      }
+    .catch(error => {
+      this._smartError(error)
     })
   }
 
@@ -93,12 +89,8 @@ class PullService {
 
       this._promptForShortCode()
     })
-    .catch(function (error) {
-      if (error.response) {
-        signale.fatal(error.response.data)
-      } else {
-        signale.fatal(error)
-      }
+    .catch(error => {
+      this._smartError(error)
     })
   }
 
@@ -118,17 +110,21 @@ class PullService {
 
       this._pull()
     })
-    .catch(function (error) {
-      if (error.response) {
-        signale.fatal(error.response.data)
-      } else {
-        signale.fatal(error)
-      }
+    .catch(error => {
+      this._smartError(error)
     })
   }
 
-  _formatErrorBody(body) {
-    return body.errors[0].message
+  async _smartError(error) {
+    if (error.response) {
+      if (error.response.data && error.response.data.errors.length > 0 && error.response.data.errors[0]) {
+        signale.fatal(error.response.data.errors[0].message)
+      } else {
+        signale.fatal(error.response.data)
+      }
+    } else {
+      signale.fatal(error)
+    }
   }
 
   _authOptions(email) {
@@ -136,7 +132,7 @@ class PullService {
     const data = {
       email: email,
       projectUid: this._DOTENV_PROJECT,
-      meuid: this._DOTENV_ME,
+      meUid: this._DOTENV_ME,
       projectName: this._DOTENV_PROJECT_NAME, // optional
     }
     const options = {
@@ -154,7 +150,7 @@ class PullService {
     const data = {
       shortCode: shortCode,
       projectUid: this._DOTENV_PROJECT,
-      meuid: this._DOTENV_ME,
+      meUid: this._DOTENV_ME,
     }
     const options = {
       method: 'POST',
