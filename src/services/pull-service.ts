@@ -41,8 +41,6 @@ class PullService {
     console.log(`remote: Securely pulling ${this._smartPullMessage}`)
     console.log('remote:')
 
-    const _this = this
-
     axios(this._pullOptions)
     .then(response => {
       if (response.data.data.dotenv) {
@@ -70,14 +68,12 @@ class PullService {
 
       console.log('Done.')
     })
-    .catch(function (error) {
-      _this._smartError(error)
+    .catch(error => {
+      this._smartError(error)
     })
   }
 
   async _auth() {
-    const _this = this
-
     const response = await prompts({
       type: 'text',
       name: 'value',
@@ -93,13 +89,12 @@ class PullService {
 
       this._promptForShortCode()
     })
-    .catch(function (error) {
-      _this._smartError(error)
+    .catch(error => {
+      this._smartError(error)
     })
   }
 
   async _promptForShortCode() {
-
     const response = await prompts({
       type: 'text',
       name: 'value',
@@ -109,22 +104,20 @@ class PullService {
     signale.await('verifying that code.')
 
     // submit shortCode for verification
-    const _this = this
-
     axios(this._verifyOptions(response.value))
     .then(_response => {
       signale.success('verified code.')
 
       this._pull()
     })
-    .catch(function (error) {
-      _this._smartError(error)
+    .catch(error => {
+      this._smartError(error)
     })
   }
 
   async _smartError(error) {
     if (error.response) {
-      if (error.response.data && error.response.data.errors && error.response.data.errors[0]) {
+      if (error.response.data && error.response.data.errors.length > 0 && error.response.data.errors[0]) {
         signale.fatal(error.response.data.errors[0].message)
       } else {
         signale.fatal(error.response.data)
