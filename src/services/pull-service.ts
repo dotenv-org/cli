@@ -41,6 +41,8 @@ class PullService {
     console.log(`remote: Securely pulling ${this._smartPullMessage}`)
     console.log('remote:')
 
+    const _this = this
+
     axios(this._pullOptions)
     .then(response => {
       if (response.data.data.dotenv) {
@@ -69,15 +71,13 @@ class PullService {
       console.log('Done.')
     })
     .catch(function (error) {
-      if (error.response) {
-        signale.fatal(error.response.data.errors[0].message)
-      } else {
-        signale.fatal(error)
-      }
+      _this._smartError(error)
     })
   }
 
   async _auth() {
+    const _this = this
+
     const response = await prompts({
       type: 'text',
       name: 'value',
@@ -94,15 +94,12 @@ class PullService {
       this._promptForShortCode()
     })
     .catch(function (error) {
-      if (error.response) {
-        signale.fatal(error.response.data)
-      } else {
-        signale.fatal(error)
-      }
+      _this._smartError(error)
     })
   }
 
   async _promptForShortCode() {
+
     const response = await prompts({
       type: 'text',
       name: 'value',
@@ -112,6 +109,8 @@ class PullService {
     signale.await('verifying that code.')
 
     // submit shortCode for verification
+    const _this = this
+
     axios(this._verifyOptions(response.value))
     .then(_response => {
       signale.success('verified code.')
@@ -119,16 +118,20 @@ class PullService {
       this._pull()
     })
     .catch(function (error) {
-      if (error.response) {
-        signale.fatal(error.response.data)
-      } else {
-        signale.fatal(error)
-      }
+      _this._smartError(error)
     })
   }
 
-  _formatErrorBody(body) {
-    return body.errors[0].message
+  async _smartError(error) {
+    if (error.response) {
+      if (error.response.data && error.response.data.errors && error.response.data.errors[0]) {
+        signale.fatal(error.response.data.errors[0].message)
+      } else {
+        signale.fatal(error.response.data)
+      }
+    } else {
+      signale.fatal(error)
+    }
   }
 
   _authOptions(email) {
@@ -136,7 +139,7 @@ class PullService {
     const data = {
       email: email,
       projectUid: this._DOTENV_PROJECT,
-      meuid: this._DOTENV_ME,
+      meUid: this._DOTENV_ME,
       projectName: this._DOTENV_PROJECT_NAME, // optional
     }
     const options = {
@@ -154,7 +157,7 @@ class PullService {
     const data = {
       shortCode: shortCode,
       projectUid: this._DOTENV_PROJECT,
-      meuid: this._DOTENV_ME,
+      meUid: this._DOTENV_ME,
     }
     const options = {
       method: 'POST',
