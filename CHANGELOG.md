@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Removed
 
-- _Breaking:_ `init` command removed. used `new` instead.
+- _Breaking:_ `init` command removed. Use `new` instead.
 
 
 ## [1.0.1](https://github.com/dotenv-org/cli/compare/v1.0.0...v1.0.1) (2022-01-21)
