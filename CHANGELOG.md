@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/dotenv-org/cli/compare/v1.0.1...master)
+## [Unreleased](https://github.com/dotenv-org/cli/compare/v2.0.0...master)
+
+## [2.0.0](https://github.com/dotenv-org/cli/compare/v1.0.1...v2.0.0) (2022-01-28)
+
+### Removed
+
+- _Breaking:_ `init` command removed. Use `new` instead.
+
 
 ## [1.0.1](https://github.com/dotenv-org/cli/compare/v1.0.0...v1.0.1) (2022-01-21)
 
@@ -14,7 +21,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Added
 
-- _Breaking:_ `new` command fully deprecated. moved to alias of `new`
+- _Breaking:_ `init` command fully deprecated. moved to alias of `new`
 
 ## [0.8.0](https://github.com/dotenv-org/cli/compare/v0.7.0...v0.8.0) (2022-01-18)
 
