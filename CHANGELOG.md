@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [Unreleased](https://github.com/dotenv-org/cli/compare/v2.0.0...master)
 
+## [2.1.0](https://github.com/dotenv-org/cli/compare/v2.0.0...v2.1.0) (2022-02-25)
+
+### Added
+
+- Add `setup` command
+
 ## [2.0.0](https://github.com/dotenv-org/cli/compare/v1.0.1...v2.0.0) (2022-01-28)
 
 ### Removed
