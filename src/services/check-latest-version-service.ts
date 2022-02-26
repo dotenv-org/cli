@@ -11,8 +11,10 @@ class CheckLatestVersionService {
     if (resp.status === 200) {
       if (compareVersions.compare(resp.data, packageJson.version, '>')) {
         console.log('********* New version of dotenv-cli available *********')
+        console.log('')
         console.log('    Run `npm install @dotenv/cli -g` to install')
         console.log('')
+        console.log('*******************************************************')
       }
     }
   }
