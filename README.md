@@ -72,14 +72,41 @@ Example:
 $ dotenv-cli new
 ```
 
-### `dotenv-cli push`
+### `dotenv-cli push [FILENAME]`
 
-Push your `.env` file.
+Push your `.env` file to development environment.
 
 Example:
 
 ```bash
 $ dotenv-cli push
+# pushes local .env to remote development
+```
+
+#### Arguments
+
+##### [FILENAME]
+
+Set input filename. Defaults to .env.
+
+Example:
+
+```bash
+$ dotenv-cli push .env.development
+# pushes .env.development to remote development environment
+```
+
+#### Options
+
+##### --dotenv_me
+
+Directly pass your `DOTENV_ME` value to the command line, instead of reading from a `.env.me` file.
+
+Examples:
+
+```bash
+$ dotenv-cli push .env.development --dotenv_me=me_1234
+# pushes local .env.development to remote development
 ```
 
 ### `dotenv-cli pull [ENVIRONMENT] [FILENAME]`

@@ -8,6 +8,15 @@ import {vars} from '../vars'
 import {WriteEnvMeService} from '../services/write-env-me-service'
 
 class PushService {
+  filename: string
+
+  dotenv_me: string
+
+  constructor(filename: string, dotenv_me: string) {
+    this.filename = filename
+    this.dotenv_me = dotenv_me
+  }
+
   async run() {
     const meFile = '.env.me'
 
@@ -128,7 +137,7 @@ class PushService {
     const data = {
       projectUid: this._DOTENV_PROJECT,
       meUid: this._DOTENV_ME,
-      dotenv: fs.readFileSync('.env', 'UTF-8'),
+      dotenv: fs.readFileSync(this._envFileName, 'UTF-8'),
     }
     const options = {
       method: 'POST',
@@ -140,6 +149,19 @@ class PushService {
     return options
   }
 
+  get _envFileName() {
+    return this._envInputFileName
+  }
+
+  get _envInputFileName() {
+    // if user has set a filename for input then use that
+    if (this.filename) {
+      return this.filename
+    }
+
+    return '.env'
+  }
+
   get _envMe() {
     return dotenv.config({path: '.env.me'})
   }
@@ -149,6 +171,10 @@ class PushService {
   }
 
   get _DOTENV_ME() {
+    if (this.dotenv_me && this.dotenv_me.length > 0) {
+      return this.dotenv_me
+    }
+
     return (this._envMe.parsed || {}).DOTENV_ME
   }
 
