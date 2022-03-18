@@ -8,6 +8,7 @@ interface WarnIfEnvDoesNotExistServiceParams {
 
 class WarnIfEnvDoesNotExistService {
   public _this;
+
   public filename;
 
   constructor(params: WarnIfEnvDoesNotExistServiceParams = {} as WarnIfEnvDoesNotExistServiceParams) {
