@@ -18,20 +18,18 @@ class PushService {
   }
 
   async run() {
-    const meFile = '.env.me'
-
-    if (fs.existsSync(meFile)) {
-      this._push()
-    } else {
+    if (this._missingMeFile) {
       await new WriteEnvMeService().run()
 
       this._auth()
+    } else {
+      this._push()
     }
   }
 
   async _push() {
     console.log('remote:')
-    console.log('remote: Securely pushing .env')
+    console.log(`remote: Securely pushing ${this._smartPushMessage}`)
     console.log('remote:')
 
     axios(this._pushOptions)
@@ -184,6 +182,23 @@ class PushService {
 
   get _DOTENV_PROJECT_NAME() {
     return (this._envProject.parsed || {}).DOTENV_PROJECT_NAME
+  }
+
+  get _smartPushMessage() {
+    if (this.filename) {
+      return `${this._envFileName}`
+    }
+
+    return this._envFileName
+  }
+
+  get _missingMeFile() {
+    // dont' require .env.me if passing dotenv_me as flag
+    if (this.dotenv_me && this.dotenv_me.length > 0) {
+      return false
+    }
+
+    return !fs.existsSync('.env.me')
   }
 }
 
