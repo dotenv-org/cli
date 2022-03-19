@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/dotenv-org/cli/compare/v2.0.0...master)
+## [Unreleased](https://github.com/dotenv-org/cli/compare/v2.2.0...master)
 
 ## [2.2.0](https://github.com/dotenv-org/cli/compare/v2.1.0...v2.2.0) (2022-03-18)
 
