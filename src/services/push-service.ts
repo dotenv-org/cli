@@ -8,21 +8,28 @@ import {vars} from '../vars'
 import {WriteEnvMeService} from '../services/write-env-me-service'
 
 class PushService {
-  async run() {
-    const meFile = '.env.me'
+  filename: string
 
-    if (fs.existsSync(meFile)) {
-      this._push()
-    } else {
+  dotenv_me: string
+
+  constructor(filename: string, dotenv_me: string) {
+    this.filename = filename
+    this.dotenv_me = dotenv_me
+  }
+
+  async run() {
+    if (this._missingMeFile) {
       await new WriteEnvMeService().run()
 
       this._auth()
+    } else {
+      this._push()
     }
   }
 
   async _push() {
     console.log('remote:')
-    console.log('remote: Securely pushing .env')
+    console.log(`remote: Securely pushing ${this._smartPushMessage}`)
     console.log('remote:')
 
     axios(this._pushOptions)
@@ -128,7 +135,7 @@ class PushService {
     const data = {
       projectUid: this._DOTENV_PROJECT,
       meUid: this._DOTENV_ME,
-      dotenv: fs.readFileSync('.env', 'UTF-8'),
+      dotenv: fs.readFileSync(this._envFileName, 'UTF-8'),
     }
     const options = {
       method: 'POST',
@@ -140,6 +147,19 @@ class PushService {
     return options
   }
 
+  get _envFileName() {
+    return this._envInputFileName
+  }
+
+  get _envInputFileName() {
+    // if user has set a filename for input then use that
+    if (this.filename) {
+      return this.filename
+    }
+
+    return '.env'
+  }
+
   get _envMe() {
     return dotenv.config({path: '.env.me'})
   }
@@ -149,6 +169,10 @@ class PushService {
   }
 
   get _DOTENV_ME() {
+    if (this.dotenv_me && this.dotenv_me.length > 0) {
+      return this.dotenv_me
+    }
+
     return (this._envMe.parsed || {}).DOTENV_ME
   }
 
@@ -158,6 +182,23 @@ class PushService {
 
   get _DOTENV_PROJECT_NAME() {
     return (this._envProject.parsed || {}).DOTENV_PROJECT_NAME
+  }
+
+  get _smartPushMessage() {
+    if (this.filename) {
+      return `${this._envFileName}`
+    }
+
+    return this._envFileName
+  }
+
+  get _missingMeFile() {
+    // dont' require .env.me if passing dotenv_me as flag
+    if (this.dotenv_me && this.dotenv_me.length > 0) {
+      return false
+    }
+
+    return !fs.existsSync('.env.me')
   }
 }
 

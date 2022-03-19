@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/dotenv-org/cli/compare/v2.0.0...master)
+## [Unreleased](https://github.com/dotenv-org/cli/compare/v2.2.0...master)
+
+## [2.2.0](https://github.com/dotenv-org/cli/compare/v2.1.0...v2.2.0) (2022-03-18)
+
+### Added
+
+- Add ability to push different files (for example .env.development) 🎉 ([#38](https://github.com/dotenv-org/cli/pull/38))
+- Add ability to specify DOTENV_ME using --dotenv_me=me_1234 flag 🎉 ([#38](https://github.com/dotenv-org/cli/pull/38))
 
 ## [2.1.0](https://github.com/dotenv-org/cli/compare/v2.0.0...v2.1.0) (2022-02-25)
 

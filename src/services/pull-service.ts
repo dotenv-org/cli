@@ -23,16 +23,14 @@ class PullService {
   }
 
   async run() {
-    const meFile = '.env.me'
-
-    if (fs.existsSync(meFile)) {
-      this._pull()
-    } else {
+    if (this._missingMeFile) {
       // eslint-disable-next-line no-warning-comments
       // TODO: prompt the user if they want to create a .env.me file - rather than raise an error. in dev maybe prompt but for prod, etc it should raise a stacktrace most likely. since machines won't be able to answer the prompts
       await new WriteEnvMeService().run()
 
       this._auth()
+    } else {
+      this._pull()
     }
   }
 
@@ -230,6 +228,15 @@ class PullService {
     }
 
     return this._envFileName
+  }
+
+  get _missingMeFile() {
+    // dont' require .env.me if passing dotenv_me as flag
+    if (this.dotenv_me && this.dotenv_me.length > 0) {
+      return false
+    }
+
+    return !fs.existsSync('.env.me')
   }
 }
 
