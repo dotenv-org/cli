@@ -16,8 +16,7 @@ class WriteEnvService {
 
   run() {
     const dotenvFile = '.env'
-    const dotenvData = `# added by dotenv - do not commit this file to code
-KEY=value`
+    const dotenvData = 'HELLO=World # added by dotenv (do not commit this file to code)'
 
     // 1. write .env
     if (fs.existsSync(dotenvFile)) {
