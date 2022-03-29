@@ -1,5 +1,5 @@
 <p align="center">
-<strong>Notice 📣</strong><br/>This CLI is deprecated. Please use the new and improved <a href="https://github.com/dotenv-org/dotenv-vault">dotenv-vault cli</a>.</a>
+<strong>Warning ⚠️</strong><br/>This CLI is deprecated. Please use the new and improved <a href="https://github.com/dotenv-org/dotenv-vault">dotenv-vault cli</a>.</a>
 </p>
 
 # @dotenv/cli
