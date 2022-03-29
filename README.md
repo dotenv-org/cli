@@ -1,3 +1,7 @@
+<p align="center">
+<strong>Notice 📣</strong><br/>This CLI is deprecated. Please use the new and improved <a href="https://github.com/dotenv-org/dotenv-vault">dotenv-vault cli</a>.</a>
+</p>
+
 # @dotenv/cli
 
 <img src="https://raw.githubusercontent.com/dotenv-org/cli/master/dotenv-cli.png" alt="@dotenv/cli" align="right" />
