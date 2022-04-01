@@ -3,7 +3,7 @@ import {AppendToGitignoreService} from '../services/append-to-gitignore-service'
 import {WarnIfEnvProjectDoesNotExistService} from '../services/warn-if-env-project-does-not-exist-service'
 import {WarnIfEnvDoesNotExistService} from '../services/warn-if-env-does-not-exist-service'
 import {PushService} from '../services/push-service'
-import {CheckLatestVersionService} from '../services/check-latest-version-service'
+import {DeprecationService} from '../services/deprecation-service'
 
 export default class Push extends Command {
   static description = 'push .env'
@@ -31,8 +31,7 @@ export default class Push extends Command {
   async run() {
     const {argv, flags} = this.parse(Push)
 
-    // 0. check latest version
-    await new CheckLatestVersionService().run()
+    new DeprecationService().run('push')
 
     // 1. create gitignore
     await new AppendToGitignoreService().run()
