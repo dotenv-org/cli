@@ -1,14 +1,13 @@
 import {Command} from '@oclif/command'
 import {AppendToGitignoreService} from '../services/append-to-gitignore-service'
-import {CheckLatestVersionService} from '../services/check-latest-version-service'
 import {OutputNewProjectLinkService} from '../services/output-new-project-link-service'
+import {DeprecationService} from '../services/deprecation-service'
 
 export default class New extends Command {
   static description = 'create .env.project file'
 
   async run() {
-    // 0. check latest version
-    await new CheckLatestVersionService().run()
+    new DeprecationService().run('new')
 
     // 1. create gitignore
     new AppendToGitignoreService().run()

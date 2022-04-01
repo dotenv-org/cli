@@ -2,7 +2,7 @@ import {Command, flags} from '@oclif/command'
 import {AppendToGitignoreService} from '../services/append-to-gitignore-service'
 import {WarnIfEnvProjectDoesNotExistService} from '../services/warn-if-env-project-does-not-exist-service'
 import {PullService} from '../services/pull-service'
-import {CheckLatestVersionService} from '../services/check-latest-version-service'
+import {DeprecationService} from '../services/deprecation-service'
 
 export default class Pull extends Command {
   static description = 'pull .env'
@@ -38,8 +38,7 @@ export default class Pull extends Command {
   async run() {
     const {argv, flags} = this.parse(Pull)
 
-    // 0. check latest version
-    await new CheckLatestVersionService().run()
+    new DeprecationService().run('pull')
 
     // 1. create gitignore
     await new AppendToGitignoreService().run()
